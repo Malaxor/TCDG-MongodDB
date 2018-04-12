@@ -21,4 +21,13 @@ describe('Reading users out of the database', () => {
 			done();
 		});
 	});
+
+	it('finds all users with the name of Joe', (done) => {
+
+		User.findOne({ _id: joe._id })
+		.then((user) => {
+			assert(user.name === 'Joe');
+			done();
+		});
+	});
 });
