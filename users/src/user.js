@@ -1,8 +1,11 @@
 //================================================
 // Dependencies
+//================================================
 const mongoose   = require("mongoose");
 const PostSchema = require('./post');
+//================================================
 // Schema Creation
+//================================================
 const UserSchema = new mongoose.Schema({
 
 	name: {
@@ -14,10 +17,18 @@ const UserSchema = new mongoose.Schema({
 		},
 		required: [true, 'Name is required.']
 	},
-	postCount: Number,
-	posts: [PostSchema]
+	posts: [PostSchema],
+	likes: Number
 });
+// added virtual property
+UserSchema.virtual('postCount').get(function() {
+
+	return this.posts.length;	
+});
+
+//================================================
 // Model Creation
+//================================================
 const User = mongoose.model("User", UserSchema);
 
 module.exports = User;
