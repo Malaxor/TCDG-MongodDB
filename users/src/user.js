@@ -1,34 +1,37 @@
 //================================================
 // Dependencies
 //================================================
-const mongoose   = require("mongoose");
+const mongoose   = require('mongoose');
 const PostSchema = require('./post');
+const Schema     = mongoose.Schema;
 //================================================
 // Schema Creation
 //================================================
-const UserSchema = new mongoose.Schema({
+const UserSchema = new Schema({
 
 	name: {
-
-		type: String,
-		validate: {
-			validator: (name) => name.length > 2,
-			message: 'Name must be at least three characters long.'
-		},
-		required: [true, 'Name is required.']
-	},
+    type: String,
+    validate: {
+      validator: (name) => name.length > 2,
+      message: 'Name must be at least three characters long.'
+    },
+    required: [true, 'Name is required.']
+  },
 	posts: [PostSchema],
-	likes: Number
+	likes: Number,
+	blogPosts: [{
+		type: Schema.Types.ObjectId,
+		ref: 'blogPost'
+	}]
 });
-// added virtual property
+// virtual property
 UserSchema.virtual('postCount').get(function() {
 
-	return this.posts.length;	
-});
-
+  return this.posts.length;
+})
 //================================================
 // Model Creation
 //================================================
-const User = mongoose.model("User", UserSchema);
+const User = mongoose.model('user', UserSchema);
 
 module.exports = User;
