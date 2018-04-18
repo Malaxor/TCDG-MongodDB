@@ -28,7 +28,14 @@ const UserSchema = new Schema({
 UserSchema.virtual('postCount').get(function() {
 
   return this.posts.length;
-})
+});
+// middleware to remove all of a user's blogPosts
+UserSchema.pre('remove', function(next) {
+
+  const BlogPost = mongoose.model('blogPost');
+  BlogPost.remove({ _id: {$in: this.blogPosts} })
+  .then(() => next());
+});
 //================================================
 // Model Creation
 //================================================
