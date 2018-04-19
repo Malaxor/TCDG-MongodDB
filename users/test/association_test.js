@@ -11,16 +11,16 @@ describe('Assocations', () => {
 
   beforeEach((done) => {
 
-	joe = new User({ name: 'Joe' });
+	joe      = new User({ name: 'Joe' });
 	blogPost = new BlogPost({ title: 'JS is Great', content: 'Yep it really is' });
-	comment = new Comment({ content: 'Congrats on a great post' });
+	comment  = new Comment({ content: 'Congrats on a great post' });
 
 	joe.blogPosts.push(blogPost);
 	blogPost.comments.push(comment);
 	comment.user = joe;
 
 	Promise.all([joe.save(), blogPost.save(), comment.save()])
-	.then(() => done());
+	 .then(() => done());
   });
 
   it('saves a relation between a user and a blogpost', (done) => {

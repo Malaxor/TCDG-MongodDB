@@ -29,7 +29,7 @@ UserSchema.virtual('postCount').get(function() {
 
   return this.posts.length;
 });
-// middleware to remove all of a user's blogPosts
+// middleware to remove all of a user's blogPosts when the user is removed
 UserSchema.pre('remove', function(next) {
 
   const BlogPost = mongoose.model('blogPost');
