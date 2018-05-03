@@ -14,14 +14,34 @@ module.exports = (criteria, sortProperty, offset = 0, limit = 20) => {
 
 		const query= {};
 
+		if(criteria.name) {
+
+			query.name = {
+
+				$regex: criteria.name,
+				$options: "i"
+			};
+		}
+
 		if(criteria.age) {
 
 			query.age = {
-				
+
 				$gte: criteria.age.min,
 				$lte: criteria.age.max
 			};
 		}
+
+		if(criteria.yearsActive) {
+
+			query.yearsActive = {
+
+				$gte: criteria.yearsActive.min,
+				$lte: criteria.yearsActive.max
+			};
+		}
+
+
 		return query;
 	};
 
@@ -30,7 +50,7 @@ module.exports = (criteria, sortProperty, offset = 0, limit = 20) => {
 	.skip(offset)
 	.limit(limit);
 
-	return Promise.all([ query, Artist.count() ])
+	return Promise.all([ query, Artist.find(buildQuery(criteria)).count() ])
 	.then((results) => {
 		return {
 			offset,
