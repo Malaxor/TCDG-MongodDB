@@ -25,7 +25,7 @@ const UserSchema = new Schema({
 	}]
 });
 // virtual property
-UserSchema.virtual('postCount').get(function() {
+UserSchema.virtual('postCount').get(() => {
 
   return this.posts.length;
 });
