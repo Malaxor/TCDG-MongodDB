@@ -8,4 +8,10 @@ module.exports = (app) => {
 
 	// CREATE
 	app.post('/drivers', driversController.create);
+
+	// EDIT
+	app.put('/drivers/:id', driversController.edit);
+
+	// DELETE
+	app.delete('/drivers/:id', driversController.delete);
 };

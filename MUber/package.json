@@ -4,12 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon --exec mocha --recursive -R min --timeout 10000"
+    "test": "set NODE_ENV=test&& nodemon --exec mocha --recursive -R min --timeout 10000"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "cross-env": "^5.1.4",
     "express": "^4.16.3",
     "mocha": "^5.1.1",
     "mongoose": "^5.0.17",
