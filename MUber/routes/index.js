@@ -4,7 +4,7 @@ const driversController = require('../controllers/drivers_controller');
 module.exports = (app) => {
 
 	// INDEX
-	app.get('/', driversController.greeting);
+	app.get('/drivers', driversController.index);
 
 	// CREATE
 	app.post('/drivers', driversController.create);
@@ -14,4 +14,7 @@ module.exports = (app) => {
 
 	// DELETE
 	app.delete('/drivers/:id', driversController.delete);
+
+	// GREETING
+	app.get('/', driversController.greeting);
 };
